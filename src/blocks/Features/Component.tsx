@@ -17,18 +17,29 @@ export const FeaturesBlock = ({ heading, items }: any) => {
               <div className="col-span-4" key={index}>
                 <div className="border border-border rounded-lg overflow-hidden bg-card">
                   <div className="p-4 pb-0">
-                    {!metaImage && <div className="">No image</div>}
-                    {metaImage && typeof metaImage !== 'string' && (
-                      <Image
-                        src={item.image.url}
-                        alt={item.title}
-                        width={400}
-                        height={250}
-                        className="w-full rounded object-cover"
-                      />
+                    <div className="overflow-hidden rounded">
+                      {!metaImage && <div>No image</div>}
 
-                    )}
+                      {metaImage && typeof metaImage !== 'string' && (
+                        <Image
+                          src={item.image.url}
+                          alt={item.title}
+                          width={400}
+                          height={250}
+                          className="
+                            w-full
+                            object-cover
+                            transition-transform
+                            duration-300
+                            ease-out
+                            hover:scale-110
+                          "
+                          style={{ aspectRatio: '8 / 5' }}
+                        />
+                      )}
+                    </div>
                   </div>
+
                   <div className="p-4">
                     {item.title && (
                       <div className="prose">

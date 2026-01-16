@@ -19,7 +19,7 @@ export const TestimonialsBlock = ({ heading, items }: any) => {
   };
 
   return (
-    <section className="container mb-24">
+    <section className="container mb-24 animate-on-scroll">
       {/* Heading + Controls */}
       <div className="mb-10 flex items-center justify-between">
         <h2 className="text-3xl font-semibold">{heading}</h2>
