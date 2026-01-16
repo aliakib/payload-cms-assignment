@@ -14,6 +14,10 @@ import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 
 export async function generateStaticParams() {
+  if (process.env.NEXT_PHASE === 'phase-production-build') {
+    return []
+  }
+
   const payload = await getPayload({ config: configPromise })
   const pages = await payload.find({
     collection: 'pages',
@@ -104,7 +108,12 @@ export async function generateMetadata({ params: paramsPromise, searchParams: se
   return generateMeta({ doc: page })
 }
 
+const isBuildTime = process.env.NEXT_PHASE === 'phase-production-build'
+
 const queryPageBySlug = cache(async ({ slug, locale }: { slug: string; locale: Locale }) => {
+  if (isBuildTime) {
+    return null
+  }
 
   const { isEnabled: draft } = await draftMode()
   locale = locale ?? "en"
