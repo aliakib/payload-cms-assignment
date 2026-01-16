@@ -1,0 +1,54 @@
+import React from 'react';
+import Image from 'next/image';
+
+export const FeaturesBlock = ({ heading, items }: any) => {
+  return (
+    <section className="container mb-16">
+      <div className="prose mb-2">
+        <h2>{heading}</h2>
+      </div>
+      <div className="grid grid-cols-4 sm:grid-cols-8 lg:grid-cols-12 gap-y-4 gap-x-4 lg:gap-y-8 lg:gap-x-8 xl:gap-x-8">
+        {items?.map((item: any, index: number) => {
+          if (typeof item === 'object' && item !== null) {
+            const { title, description, image: metaImage } = item;
+            const sanitizedDescription = description?.replace(/\s/g, ' ') // replace non-breaking space with white space
+
+            return (
+              <div className="col-span-4" key={index}>
+                <div className="border border-border rounded-lg overflow-hidden bg-card">
+                  <div className="p-4 pb-0">
+                    {!metaImage && <div className="">No image</div>}
+                    {metaImage && typeof metaImage !== 'string' && (
+                      <Image
+                        src={item.image.url}
+                        alt={item.title}
+                        width={400}
+                        height={250}
+                        className="w-full rounded object-cover"
+                      />
+
+                    )}
+                  </div>
+                  <div className="p-4">
+                    {item.title && (
+                      <div className="prose">
+                        <h3>
+                          {/* <Link className="not-prose" href={href} ref={link.ref}> */}
+                          {item.title}
+                          {/* </Link> */}
+                        </h3>
+                      </div>
+                    )}
+                    {description && <div className="mt-2">{description && <p>{sanitizedDescription}</p>}</div>}
+                  </div>
+                </div>
+              </div>
+            )
+          }
+
+          return null
+        })}
+      </div>
+    </section>
+  );
+};
