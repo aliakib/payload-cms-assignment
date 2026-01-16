@@ -4,8 +4,6 @@ import Image from 'next/image';
 import React, { useRef } from 'react';
 
 export const TestimonialsBlock = ({ heading, items }: any) => {
-  if (!items?.length) return null;
-
   const sliderRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: 'left' | 'right') => {
@@ -17,6 +15,8 @@ export const TestimonialsBlock = ({ heading, items }: any) => {
       behavior: 'smooth',
     });
   };
+
+  if (!items?.length) return null;
 
   return (
     <section className="container mb-24 animate-on-scroll">
